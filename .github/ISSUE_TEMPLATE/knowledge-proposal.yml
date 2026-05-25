@@ -3,18 +3,14 @@ description: "新しい設計基準やベストプラクティスを提案しま
 title: "[Knowledge]: "
 labels: ["knowledge"]
 body:
-  - type: dropdown
-    id: category
+  - type: input
+    id: category_hint
     attributes:
-      label: "カテゴリ (ディレクトリ)"
-      options:
-        - api-design
-        - database-design
-        - application-design
-        - security-design
+      label: "想定カテゴリ (任意)"
+      description: "API設計、インフラなど。未入力の場合はAIが内容から既存カテゴリの割り当て、または新規作成を自動で行います。"
     validations:
-      required: true
-      
+      required: false
+
   - type: textarea
     id: what
     attributes:
@@ -54,7 +50,7 @@ body:
       description: "テスト方法やレビュー時の確認観点など。"
     validations:
       required: false
-      
+
   - type: textarea
     id: context
     attributes:

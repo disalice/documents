@@ -4,23 +4,20 @@ import path from "path";
 
 // ディレクトリ構造からサイドバーを動的に生成する関数
 function getDynamicSidebar() {
-  // .vitepress から見たドキュメントルート (dist/human/)
   const docsRoot = path.join(process.cwd(), "src");
-
-  // 対象とするカテゴリ（ディレクトリ名）の一覧
-  const categories = [
-    "api-design",
-    "database-design",
-    "application-design",
-    "security-design",
-  ];
   const sidebar: any[] = [];
+
+  // srcディレクトリが存在しない場合は空配列を返す
+  if (!fs.existsSync(docsRoot)) return sidebar;
+
+  // src直下のディレクトリを動的に取得（.vitepressなどの隠しフォルダは除外）
+  const categories = fs
+    .readdirSync(docsRoot, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith("."))
+    .map((dirent) => dirent.name);
 
   for (const cat of categories) {
     const catDir = path.join(docsRoot, cat);
-
-    // ディレクトリが存在しない場合はスキップ
-    if (!fs.existsSync(catDir)) continue;
 
     // ディレクトリ内の .md ファイルを取得（index.md は除外）
     const files = fs
@@ -45,7 +42,7 @@ function getDynamicSidebar() {
 
     if (items.length > 0) {
       sidebar.push({
-        text: cat.toUpperCase().replace("-", " "),
+        text: cat.toUpperCase().replace(/-/g, " "), // ハイフンを全てスペースに置換
         items: items,
       });
     }
