@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import fs from "fs";
 import path from "path";
+import taskLists from "markdown-it-task-lists";
 
 // ディレクトリ構造からサイドバーを動的に生成する関数
 function getDynamicSidebar() {
@@ -54,6 +55,14 @@ export default defineConfig({
   base: "/knowledge-forge/",
   title: "Knowledge Forge",
   description: "Engineering Best Practices",
+
+  // markdown オプションを追加
+  markdown: {
+    config: (md) => {
+      md.use(taskLists, { disabled: true }); // trueにすると閲覧者がチェックを外せなくなる
+    },
+  },
+
   themeConfig: {
     nav: [{ text: "Home", link: "/" }],
     // 動的に生成したサイドバーを注入

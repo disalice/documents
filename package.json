@@ -8,6 +8,8 @@
     "docs:preview": "vitepress preview src"
   },
   "devDependencies": {
+    "@types/markdown-it": "^13.0.7",
+    "markdown-it-task-lists": "^2.1.1",
     "vitepress": "latest",
     "vue": "^3.4.0"
   }

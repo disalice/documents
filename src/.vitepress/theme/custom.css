@@ -1,0 +1,10 @@
+/* タスクリストの不要なリストマーク(・)を非表示にする */
+.vp-doc li.task-list-item {
+  list-style-type: none !important;
+}
+
+/* チェックボックスとテキストの間隔を整える */
+.vp-doc li.task-list-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
