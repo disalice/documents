@@ -1,0 +1,23 @@
+[
+  {
+    "metadata": {
+      "id": 1,
+      "title": "REST APIのレスポンスにおけるrequestIdの必須化",
+      "description": "REST APIのレスポンスには必ずrequestIdを含めることで、トレーサビリティを向上させることができます。",
+      "category": "api-design",
+      "author": "disalice",
+      "difficulty": 2,
+      "tags": [
+        "API",
+        "REST",
+        "トレーサビリティ"
+      ],
+      "target_artifacts": [
+        "API仕様書",
+        "ドキュメント"
+      ],
+      "updated_at": "2026-05-25"
+    },
+    "body": "### 概要\nREST APIのレスポンスには必ずrequestIdを含めることが推奨されます。これにより、リクエストのトレーサビリティが向上し、問題発生時のデバッグが容易になります。\n\n### 理由\n- トレーサビリティの向上\n- 問題発生時のデバッグの容易さ\n\n### 実装例\n```json\n{\n  \"requestId\": \"12345\",\n  \"data\": {...}\n}\n```\n\n### 注意点\n- requestIdはユニークである必要があります。\n- 各レスポンスに必ず含めるようにしてください。"
+  }
+]
