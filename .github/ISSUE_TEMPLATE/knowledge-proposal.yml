@@ -36,6 +36,30 @@ body:
       required: false
 
   - type: textarea
+    id: checklist
+    attributes:
+      label: "設計・実装時のチェックリスト (Checklist) ※任意"
+      description: "設計レビューやコードレビュー時に確認すべき具体的なセルフチェック項目があれば記載してください。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: antipatterns
+    attributes:
+      label: "アンチパターン (Antipatterns) ※任意"
+      description: "よくある誤った設計・実装例や、避けるべきアンチパターンがあれば記載してください。"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: "導入することによるトレードオフ (Trade-offs) ※任意"
+      description: "この設計や手法を採用することで生じるデメリットや、引き換えになるもの（パフォーマンス、学習コスト、運用負荷など）があれば記載してください。"
+    validations:
+      required: false
+
+  - type: textarea
     id: where
     attributes:
       label: "スコープと例外 (Where) ※任意"

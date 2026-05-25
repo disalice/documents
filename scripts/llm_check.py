@@ -98,6 +98,7 @@ def step2_generate_markdown(issue_body, author, category, related_files_content,
     """【第2段階】絞り込まれた特定のファイル本文のみをコンテキストに含め、最終的なMarkdownを生成する"""
     system_prompt = f"""あなたは優秀なシニアソフトウェアエンジニアです。
 提案されたIssue内容を、プロジェクトに依存しない汎用的なベストプラクティスとして構造化・自動補完してMarkdownを生成してください。
+関連ナレッジの項目については、Issue内に含まれていなければ補完せず無いものとして扱う。
 
 【選定されたカテゴリ】
 {category}
@@ -127,9 +128,17 @@ def step2_generate_markdown(issue_body, author, category, related_files_content,
      - ## 概要
      - ## なぜ必要なのか
      - ## 実装標準
+     - ## 設計・実装時のチェックリスト
+     - ## アンチパターン
+       - なければ削除してOK
+     - ## 実施・導入によるトレードオフ
+       - なければ削除してOK
      - ## 適用範囲と例外
+       - なければ削除してOK
      - ## 検証方法
+       - なければ削除してOK
      - ## 関連ナレッジ
+       - なければ削除してOK
 
 必ず以下のJSONスキーマのみを出力してください。
 {{
