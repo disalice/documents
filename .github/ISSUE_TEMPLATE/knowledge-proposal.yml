@@ -1,0 +1,23 @@
+name: "ナレッジの追加・更新提案"
+description: "新しい設計基準やベストプラクティスを提案します"
+title: "[Knowledge]: "
+labels: ["knowledge"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: "カテゴリ (ディレクトリ)"
+      options:
+        - api-design
+        - database-design
+        - application-design
+        - security-design
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: "提案内容"
+      description: "背景（Why）、トレードオフ、チェックリスト等を記載してください。"
+    validations:
+      required: true

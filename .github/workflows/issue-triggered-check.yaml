@@ -1,0 +1,49 @@
+name: Knowledge Pipeline - Issue Trigger
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  llm-knowledge-process:
+    runs-on: ubuntu-latest
+    # セキュリティ要件: オーナーまたはホワイトリストのみ実行許可
+    if: >
+      github.actor == github.repository_owner || 
+      contains(fromJSON('["trusted-member1", "trusted-member2"]'), github.actor)
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install openai python-frontmatter pyyaml
+
+      - name: Run LLM Check and Generate Markdown
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          AUTHOR: ${{ github.actor }}
+        # 後述のスクリプトを実行し、src/ 配下のファイルを生成・更新する
+        run: python scripts/llm_check.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "docs(knowledge): Issue #${{ github.event.issue.number }} からナレッジを自動生成/更新"
+          title: "[Auto] ナレッジの追加/更新 (Issue #${{ github.event.issue.number }})"
+          body: "GitHub Models (GPT-4o mini) による自動生成PRです。\n重複・矛盾チェックを通過しました。レビューをお願いします。"
+          branch: "auto-knowledge-issue-${{ github.event.issue.number }}"
+          labels: "automated pr, knowledge"
