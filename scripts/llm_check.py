@@ -15,21 +15,31 @@ def build_system_prompt(existing_files_content):
     today = datetime.now().strftime("%Y-%m-%d")
     return f"""あなたは優秀なシニアソフトウェアエンジニアです。
 ユーザーから新しいナレッジ（Issue内容）が提案されます。
-あなたのタスクは、既存のナレッジベース（以下）と提案を比較し、以下の処理を行うことです。
+あなたのタスクは、既存のナレッジベース（以下）と提案を比較し、プロジェクトに依存しない汎用的なベストプラクティスとしてナレッジを構造化・自動補完して出力することです。
 
 【既存のナレッジ】
 {existing_files_content}
 
+【ナレッジの構造化と自動補完ルール】
+ユーザーの提案（Issue本文）には、What, Why, How, Where, Validation, Context の項目が含まれます。
+情報が不足している項目、または未入力の項目がある場合、あなたの持つ一般的なソフトウェアエンジニアリングの知識を用いて、汎用的かつ実践的な内容で自動補完（推測・加筆）してください。
+
 【判定・編集ルール】
 1. 重複・矛盾の確認: 提案内容が既存ナレッジと重複、または矛盾していないか確認してください。
-2. 命名規則・表記揺れの自動補正: JSONのキー名、変数名、技術用語において、キャメルケース（例: requestId）とスネークケース（例: trace_id）の混在など表記揺れを検出した場合、システム全体で一貫性が出るように自動でフォーマットを統一してください。
+2. 命名規則・表記揺れの自動補正: JSONのキー名、変数名、技術用語において表記揺れを検出した場合、システム全体で一貫性が出るように自動でベストなフォーマットへ統一してください。
 3. 処理の決定:
    - 重複がある場合: 既存のMarkdownを統合し、表記揺れを修正・上書きする形で出力。
    - 重複がない場合: 新規Markdownとして出力。
-4. 出力フォーマット:
-   - YAML Front Matterを含めた完全なMarkdownを出力すること。
-   - 指定されたスキーマ（id, title, category, author, difficulty, tags, target_artifacts, updated_at）を厳守すること。
-   - `updated_at` には本日付（{today}）を使用してください。
+4. Markdown出力フォーマット:
+   - YAML Front Matter（id, title, category, author, difficulty, tags, target_artifacts, updated_at）を含めること。
+   - `updated_at` には本日付（{today}）を使用すること。
+   - 本文は必ず以下の見出し構成（Markdown形式）に統一すること：
+     - ## 概要 (What)
+     - ## なぜ必要なのか (Why)
+     - ## 実装標準 (How)
+     - ## 適用範囲と例外 (Where)
+     - ## 検証方法 (Validation)
+     - ## 関連ナレッジ (Context)
 
 必ず以下のJSONスキーマのみを出力してください（Markdownのコードブロックは不要です）。
 {{
@@ -42,7 +52,6 @@ def build_system_prompt(existing_files_content):
 def extract_category(issue_body):
     """
     Issue Formsから生成されたMarkdownボディからカテゴリを抽出する。
-    例: ### カテゴリ (ディレクトリ)\n\napi-design
     """
     match = re.search(r'### カテゴリ \(ディレクトリ\)\s+([^\n\r]+)', issue_body)
     if match:

@@ -1,5 +1,5 @@
 name: "ナレッジの追加・更新提案"
-description: "新しい設計基準やベストプラクティスを提案します"
+description: "新しい設計基準やベストプラクティスを提案します（AIが詳細を自動補完します）"
 title: "[Knowledge]: "
 labels: ["knowledge"]
 body:
@@ -14,10 +14,51 @@ body:
         - security-design
     validations:
       required: true
+      
   - type: textarea
-    id: content
+    id: what
     attributes:
-      label: "提案内容"
-      description: "背景（Why）、トレードオフ、チェックリスト等を記載してください。"
+      label: "提案の概要 (What)"
+      description: "追加・更新したいナレッジの結論やルールを簡潔に記載してください。（例: APIのレスポンスにrequestIdを付与する）"
     validations:
       required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: "なぜやるのか？ (Why) ※任意"
+      description: "背景や目的、やらない場合のリスクなど。未入力の場合、AIが一般的なベストプラクティスから自動補完します。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: how
+    attributes:
+      label: "どうやるのか？ (How) ※任意"
+      description: "実装方針や推奨される仕様など。プロジェクトに依存しない汎用的なアプローチがあれば記載してください。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: where
+    attributes:
+      label: "スコープと例外 (Where) ※任意"
+      description: "適用すべき範囲や、適用しなくてもよい例外ケースがあれば記載してください。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: "どう確かめるのか？ (Validation) ※任意"
+      description: "テスト方法やレビュー時の確認観点など。"
+    validations:
+      required: false
+      
+  - type: textarea
+    id: context
+    attributes:
+      label: "関連するナレッジ (Context) ※任意"
+      description: "関連する他の設計基準や考慮事項があれば記載してください。"
+    validations:
+      required: false
