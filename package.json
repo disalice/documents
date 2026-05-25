@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "docs:dev": "vitepress dev dist/human",
-    "docs:build": "vitepress build dist/human",
-    "docs:preview": "vitepress preview dist/human"
+    "docs:dev": "vitepress dev src --host",
+    "docs:build": "vitepress build src --outDir ../dist/human",
+    "docs:preview": "vitepress preview src"
   },
   "devDependencies": {
     "vitepress": "latest",

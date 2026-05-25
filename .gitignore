@@ -1,7 +1,7 @@
 # Node
 node_modules/
-.vitepress/dist/
-.vitepress/cache/
+**/.vitepress/dist/
+**/.vitepress/cache/
 
 # Python
 __pycache__/
