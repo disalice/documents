@@ -28,11 +28,13 @@ def convert_md_to_json():
             os.makedirs(os.path.dirname(json_path), exist_ok=True)
             
             with open(json_path, "w", encoding="utf-8") as out_f:
-                json.dump(knowledge_item, out_f, ensure_ascii=False, indent=2)
+                # default=str: dateオブジェクトなどjsonにパースできないオブジェクトを自動的にstrへ変換
+                json.dump(knowledge_item, out_f, ensure_ascii=False, indent=2, default=str)
 
     # 全体インデックス用JSONの出力（LLMが一括で読み込む用）
     with open(os.path.join(DIST_LLM_DIR, "index.json"), "w", encoding="utf-8") as index_f:
-        json.dump(knowledge_list, index_f, ensure_ascii=False, indent=2)
+                # default=str: dateオブジェクトなどjsonにパースできないオブジェクトを自動的にstrへ変換
+        json.dump(knowledge_list, index_f, ensure_ascii=False, indent=2, default=str)
 
 if __name__ == "__main__":
     convert_md_to_json()
