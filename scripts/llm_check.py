@@ -2,7 +2,7 @@ import glob
 import json
 import os
 from datetime import datetime
-from time import time
+import time
 
 import frontmatter
 from openai import OpenAI
