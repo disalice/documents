@@ -1,6 +1,7 @@
 {
   "name": "knowledge-repository",
   "private": true,
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev dist/human",
     "docs:build": "vitepress build dist/human",
