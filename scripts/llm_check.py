@@ -96,7 +96,8 @@ def step1_analyze_and_extract_metadata(issue_body, metadata_list, standard_tags)
   "target_artifacts": ["API仕様書", "コード" などの影響成果物],
   "related_file_paths": ["重複・関連する既存ファイルのパス"],
   "action": "create または update",
-  "target_file_path": "対象となるファイルパス"
+  "target_file_path": "対象となるファイルパス",
+  "implied_technologies": ["文章から推測される暗黙の前提技術（例: RDBMS, SQL, React, AWSなど。最大3つ）"]
 }}
 """
     response = client.chat.completions.create(
@@ -135,6 +136,14 @@ def step2_generate_body_only(issue_body, related_files_content):
    ## 検証方法
    ## 関連ナレッジ
 4. Issue内容から情報が欠落しないよう最新の注意をしてください。
+
+【文章生成における重要なルール】
+- Issueの内容が特定の技術領域（例: SQL, RDBMS, React, AWSなど）を
+  暗黙の前提としている場合、初学者にも文脈が伝わるよう、その前提技術を推論してください。
+- 推論した前提知識は独立した見出しにせず、**「## 概要」の冒頭で自然な文脈として
+  （例：「RDBMSにおける大量データの取得において〜」など）補足**してください。
+- ユーザーの提案（What/Why/Howなど）から情報が欠落しないよう、細心の注意を払いつつ、
+  不足している背景知識はあなたの専門知識で補完してください。
 """
     try:
         # ストリーミングを有効にしてリクエスト
