@@ -1,5 +1,5 @@
-name: "ナレッジの追加・更新提案"
-description: "新しい設計基準やベストプラクティスを提案します（AIが詳細を自動補完します）"
+name: "ナレッジの追加・更新"
+description: "新しい設計基準やベストプラクティスを起票します（AIが詳細を自動補完します）"
 title: "[Knowledge]: "
 labels: ["knowledge"]
 body:
@@ -25,7 +25,7 @@ body:
   - type: textarea
     id: what
     attributes:
-      label: "提案の概要 (What)"
+      label: "ナレッジの概要 (What)"
       description: "追加・更新したいナレッジの結論やルールを簡潔に記載してください。（例: APIのレスポンスにrequestIdを付与する）"
     validations:
       required: true

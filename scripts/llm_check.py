@@ -66,10 +66,10 @@ def step1_analyze_and_extract_metadata(
     【第1段階】JSONモードを使用し、メタデータとルーティング情報だけを厳格に生成させる
     """
     system_prompt = f"""あなたは優秀なソリューションアーキテクトです。
-ユーザーから提案されたIssue内容を分析し、メタデータを決定してください。
+ユーザーから起票されたIssue内容を分析し、メタデータを決定してください。
 
 【タイトルの決定ルール】
-- ユーザーが提案したタイトル「{issue_title}」から "[Knowledge]: " などのプレフィックスを
+- ユーザーが起票したタイトル「{issue_title}」から "[Knowledge]: " などのプレフィックスを
   除外したものを、そのまま厳密に `title` として使用してください。
   もしタイトルが無題の場合、Issue内容から推測してください。
 
@@ -113,7 +113,7 @@ def step1_analyze_and_extract_metadata(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"提案内容:\n{issue_body}"},
+            {"role": "user", "content": f"起票内容:\n{issue_body}"},
         ],
         response_format={"type": "json_object"},
         temperature=0.1,
@@ -154,7 +154,7 @@ def step2_generate_body_only(issue_title, issue_body, related_files_content):
   暗黙の前提としている場合、初学者にも文脈が伝わるよう、その前提技術を推論してください。
 - 推論した前提知識は独立した見出しにせず、**「## 概要」の冒頭で自然な文脈として
   （例：「RDBMSにおける大量データの取得において〜」など）補足**してください。
-- ユーザーの提案（What/Why/Howなど）から情報が欠落しないよう、細心の注意を払いつつ、
+- ユーザーの起票（What/Why/Howなど）から情報が欠落しないよう、細心の注意を払いつつ、
   不足している背景知識はあなたの専門知識で補完してください。
 """
     try:

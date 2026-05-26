@@ -8,33 +8,32 @@
 
 ## Features
 
-* **AIによるナレッジの自動補完・構造化**: Issueで概要（What）を提案するだけで、AI（GPT-4o mini）が既存のナレッジと照合し、背景（Why）や実装方法（How）を補完して整理されたMarkdownを生成します。
-* **人間とAIの協調ワークフロー**: AIが生成したMarkdownは自動でPull Request（PR）として起票され、人間のレビューを経てからメインブランチにマージされます。
-* **人間向けドキュメント（VitePress）**: マージされると、人間が読みやすい静的サイトとして[GitHub Pages](https://disalice.github.io/knowledge-forge/)にデプロイされます。
-* **LLM向けデータ（JSON）**: 同時に、他のAIシステムがシステムプロンプトやRAGとして活用しやすいJSON形式（Front Matterのメタデータ＋本文）にパースされ、公開されます。
+- **AIによるナレッジの自動補完・構造化**: Issueで概要（What）を起票するだけで、AI（GPT-4o mini）が既存のナレッジと照合し、背景（Why）や実装方法（How）を補完して整理されたMarkdownを生成します。
+- **人間とAIの協調ワークフロー**: AIが生成したMarkdownは自動でPull Request（PR）として起票され、人間のレビューを経てからメインブランチにマージされます。
+- **人間向けドキュメント（VitePress）**: マージされると、人間が読みやすい静的サイトとして[GitHub Pages](https://disalice.github.io/knowledge-forge/)にデプロイされます。
+- **LLM向けデータ（JSON）**: 同時に、他のAIシステムがシステムプロンプトやRAGとして活用しやすいJSON形式（Front Matterのメタデータ＋本文）にパースされ、公開されます。
 
 ## ワークフロー
 
-ナレッジが提案されてから公開されるまでのサイクルは以下の通りです。
+ナレッジが起票されてから公開されるまでのサイクルは以下の通りです。
 
-1. **提案 (Issue)**
-* 開発者がリポジトリの Issue Forms（ナレッジの追加・更新提案）から、新しいナレッジのカテゴリと概要を入力します。
+1. **起票 (Issue)**
 
+- 開発者がリポジトリの Issue Forms（ナレッジの追加・更新起票）から、新しいナレッジのカテゴリと概要を入力します。
 
 1. **生成 (GitHub Actions + LLM)**
-* Issueの起票/更新をトリガーにワークフローが起動し、`scripts/llm_check.py` が実行されます。
-* AIが不足している項目を補完し、重複や矛盾を解決した上でフォーマットを統一したMarkdownを作成し、自動でPRを作成します。
 
+- Issueの起票/更新をトリガーにワークフローが起動し、`scripts/llm_check.py` が実行されます。
+- AIが不足している項目を補完し、重複や矛盾を解決した上でフォーマットを統一したMarkdownを作成し、自動でPRを作成します。
 
 3. **レビュー & マージ (Pull Request)**
-* 生成されたPRの内容を人間がレビュー・修正し、`main` ブランチにマージします。
 
+- 生成されたPRの内容を人間がレビュー・修正し、`main` ブランチにマージします。
 
 4. **デプロイ (GitHub Pages)**
-* `main` ブランチへのプッシュをトリガーに、`scripts/parse_to_json.py` が実行され `dist/llm/` にJSONファイルが生成されます。
-* VitePressがビルドされ、人間用のサイト（`dist/human`）とLLM用のJSONがGitHub Pagesへデプロイされます。
 
-
+- `main` ブランチへのプッシュをトリガーに、`scripts/parse_to_json.py` が実行され `dist/llm/` にJSONファイルが生成されます。
+- VitePressがビルドされ、人間用のサイト（`dist/human`）とLLM用のJSONがGitHub Pagesへデプロイされます。
 
 ## ディレクトリ構成
 
@@ -42,7 +41,7 @@
 .
 ├── .devcontainer/          # Dev Container定義（Node.js + Python/uv）
 ├── .github/
-│   ├── ISSUE_TEMPLATE/     # ナレッジ提案用のIssue Form
+│   ├── ISSUE_TEMPLATE/     # ナレッジ起票用のIssue Form
 │   └── workflows/          # 自動生成・デプロイ用のActions定義
 ├── dist/
 │   ├── human/              # VitePressビルド用の人間向け公開ディレクトリ
@@ -63,9 +62,9 @@
 
 ### 前提条件
 
-* Docker Desktop（または OrbStack 等のコンテナランタイム）
-* VS Code または Cursor
-* 拡張機能: `Dev Containers` (`ms-vscode-remote.remote-containers`)
+- Docker Desktop（または OrbStack 等のコンテナランタイム）
+- VS Code または Cursor
+- 拡張機能: `Dev Containers` (`ms-vscode-remote.remote-containers`)
 
 ### 起動手順
 
