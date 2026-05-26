@@ -14,8 +14,7 @@ body:
         - security-design
         - testing
         - architecture
-        - operations
-        - other
+        - collaboration
     validations:
       required: true
 
