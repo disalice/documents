@@ -46,7 +46,8 @@
       "difficulty": 3,
       "tags": [
         "API",
-        "パフォーマンス"
+        "パフォーマンス",
+        "セキュリティ"
       ],
       "target_artifacts": [
         "API仕様書",
