@@ -13,7 +13,10 @@ body:
         - database-design
         - security-design
         - testing
-        - architecture
+        - app-architecture
+        - frontend-architecture
+        - distributed-systems
+        - infrastructure
         - collaboration
     validations:
       required: true
