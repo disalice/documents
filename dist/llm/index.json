@@ -84,8 +84,7 @@
       "difficulty": 3,
       "tags": [
         "クリーンアーキテクチャ",
-        "DDD",
-        "仕事の進め方"
+        "DDD"
       ],
       "target_artifacts": [
         "コード"
@@ -120,9 +119,7 @@
       "category": "collaboration",
       "author": "disalice",
       "difficulty": 3,
-      "tags": [
-        "仕事の進め方"
-      ],
+      "tags": [],
       "target_artifacts": [
         "ドキュメント",
         "チームガイドライン"
