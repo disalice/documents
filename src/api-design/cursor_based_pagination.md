@@ -1,6 +1,6 @@
 ---
 id: 688bae97-c570-4ca3-99d1-94904b937012
-title: カーソルベースのページネーションの導入
+title: カーソルベースのページネーション
 category: api-design
 author: disalice
 difficulty: 3

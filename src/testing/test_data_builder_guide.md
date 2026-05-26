@@ -1,6 +1,6 @@
 ---
 id: cff9b06d-d308-49bf-96f1-5a66f0894c9d
-title: テストデータビルダーの導入ガイド
+title: テストデータビルダー
 category: testing
 author: disalice
 difficulty: 3

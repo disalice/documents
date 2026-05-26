@@ -1,10 +1,10 @@
 ---
 id: 96e7ed6e-5f55-4108-a45d-a412fa5eba5f
-title: CQRSによるアーキテクチャの分離設計
+title: クリーンアーキテクチャにおけるCQRSでのパフォーマンス向上
 category: app-architecture
 author: disalice
 difficulty: 3
-tags: ["DDD", "クリーンアーキテクチャ", "冪等性"]
+tags: ["DDD", "クリーンアーキテクチャ", "冪等性", "パフォーマンス"]
 target_artifacts: ["コード", "設計書"]
 updated_at: 2026-05-26
 ---

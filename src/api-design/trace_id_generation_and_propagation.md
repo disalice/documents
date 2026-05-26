@@ -1,6 +1,6 @@
 ---
 id: 506d3ae1-9a36-46b8-a1c4-79b8d0bd00cc
-title: Trace IDの生成と伝播の実装ガイド
+title: Trace ID
 category: api-design
 author: disalice
 difficulty: 3
